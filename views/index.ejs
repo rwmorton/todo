@@ -1,4 +1,4 @@
 <%- include('header') %>
 <% const name = currentUser ? currentUser.username : 'guest'; %>
-<h1>Hello <%= name %>,<% if(currentUser) {%> click <a href="todos/">here</a> to see your todos. <% } else { %> feel free to <a href="/user/register">sign up!</a> <% } %></h1>
+<h1>Hello <%= name %>,<% if(currentUser) {%> click <a href="/todos">here</a> to see your todos. <% } else { %> feel free to <a href="/user/register">sign up!</a> <% } %></h1>
 <%- include('footer') %>

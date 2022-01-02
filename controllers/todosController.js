@@ -10,10 +10,14 @@ exports.loadTodos = (req,res) =>
     User.findById(userId).populate('todos').exec((error,{todos}) =>
     {
         if(error) return console.error(error);
-        todos.forEach(todo =>
+        if(todos.length > 0)
         {
-            res.render('todos/todos',{todos: todos});
-        });
+            todos.forEach(todo =>
+            {
+                res.render('todos/todos',{todos: todos});
+            });
+        }
+        else res.render('todos/add');
     });
 };
 
@@ -38,12 +42,11 @@ exports.create = (req,res,next) =>
             res.locals.currentUser.save();
             console.log(res.locals.currentUser.todos);
         }
-        res.locals.redirect = 'todos/todos';
         next();
     })
     .catch(error =>
     {
-        console.error(`Error savingtodo: ${error.message}`);
+        console.error(`Error saving todo: ${error.message}`);
         next(error);
     });
 };
@@ -58,7 +61,6 @@ exports.edit = (req,res,next) =>
     })
     .catch(error =>
     {
-        res.locals.redirect = 'todos';
         next(error);
     });
 };
