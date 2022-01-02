@@ -2,6 +2,7 @@
 <h2>To add a new todo, <a href="/todos/add">click here.</a></h2>
 <hr />
 <h2>Hello <%= currentUser.username %>, see your list of todos below.</h2>
+<% if(todos.length === 0) { %> <p>You have no todos saved.</p> <% } else { %>
 <table>
     <tr>
         <th>Todo</th>
@@ -18,6 +19,7 @@
     </tr>
     <% }) %>
 </table>
+<% } %>
 <hr />
 <button>Submit</button>
 <%- include('../footer') %>
