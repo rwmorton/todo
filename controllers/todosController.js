@@ -3,9 +3,9 @@
 const Todo = require('../models/todo');
 const User = require('../models/user');
 
+//not loading properly
 exports.loadTodos = (req,res) =>
 {
-    console.log('loading todos...');
     let userId;
     if(res.locals.currentUser) userId = res.locals.currentUser._id.toString();
     User.findById(userId).populate('todos').exec((error,{todos}) =>
@@ -31,7 +31,6 @@ exports.create = (req,res,next) =>
             res.locals.currentUser.todos.push(todo);
             res.locals.currentUser.save();
         }
-        console.log('saved todo. going next...');
         next();
     })
     .catch(error =>

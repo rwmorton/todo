@@ -1,7 +1,6 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const Todo = require('./todo');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 

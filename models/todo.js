@@ -1,7 +1,6 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const User = require('./user');
 const Schema = mongoose.Schema;
 
 const TodoSchema = new Schema

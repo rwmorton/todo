@@ -2,7 +2,6 @@
 
 const router = require('express').Router();
 
-const User = require('../models/user');
 const userController = require('../controllers/userController');
 
 router.get('/register',userController.new);
