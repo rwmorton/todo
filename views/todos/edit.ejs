@@ -1,0 +1,8 @@
+<%- include('../header') %>
+<h2>Edit todo...</h2>
+<form method="post" action="<%= `/todos/${todo._id}/update?_method=PUT` %>">
+    <textarea name="todo" rows="5" cols="50"><%= todo.todo %></textarea>
+    <input type="submit" value="EDIT">
+</form>
+<hr />
+<%- include('../footer') %>

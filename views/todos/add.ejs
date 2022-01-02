@@ -1,0 +1,8 @@
+<%- include('../header') %>
+<h2>Add a new todo</h2>
+<form method="post" action="/todos/add">
+    <textarea name="todo" rows="5" cols="50" placeholder="What do you need to do?"></textarea>
+    <input type="submit" value="ADD">
+</form>
+<hr />
+<%- include('../footer') %>
