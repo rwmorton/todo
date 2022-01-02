@@ -5,19 +5,13 @@ const User = require('../models/user');
 
 exports.loadTodos = (req,res) =>
 {
+    console.log('loading todos...');
     let userId;
     if(res.locals.currentUser) userId = res.locals.currentUser._id.toString();
     User.findById(userId).populate('todos').exec((error,{todos}) =>
     {
         if(error) return console.error(error);
-        if(todos.length > 0)
-        {
-            todos.forEach(todo =>
-            {
-                res.render('todos/todos',{todos: todos});
-            });
-        }
-        else res.render('todos/add');
+        res.render('todos/todos',{todos: todos});
     });
 };
 
@@ -29,19 +23,15 @@ exports.add = ((req,res) =>
 exports.create = (req,res,next) =>
 {
     let newTodo = new Todo({todo: req.body.todo,user: res.locals.currentUser._id});
-    console.log(newTodo + ' for ' + res.locals.currentUser);
     Todo.create(newTodo)
     .then(todo =>
     {
-        /////// TO CHECK ///////
-        ///////////// NOT THE BEST SOLUTION ////////////////
-        ///// ADD THIS TODO TO THE CURRENT USRS TODO ARRAY
         if(todo)
         {
             res.locals.currentUser.todos.push(todo);
             res.locals.currentUser.save();
-            console.log(res.locals.currentUser.todos);
         }
+        console.log('saved todo. going next...');
         next();
     })
     .catch(error =>
@@ -83,7 +73,6 @@ exports.update = (req,res,next) =>
 exports.delete = (req,res,next) =>
 {
     let todoId = req.params.id;
-    console.log(todoId);
     Todo
     .findByIdAndRemove(todoId)
     .then(() =>
